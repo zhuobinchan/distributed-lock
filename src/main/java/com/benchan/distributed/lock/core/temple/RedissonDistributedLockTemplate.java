@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.redisson.config.SentinelServersConfig;
 import org.redisson.config.SingleServerConfig;
@@ -93,29 +94,6 @@ public class RedissonDistributedLockTemplate implements DistributedLockTemplate 
 
     private Config toSentinelConfig(RedissonConfig redissonConfig) {
         Config config = new Config();
-        SingleServerConfig serverConfig = config.useSingleServer().setAddress(redissonConfig.getAddress()).setTcpNoDelay(true)
-                .setConnectionMinimumIdleSize(redissonConfig.getConnectionMinimumIdleSize()).setConnectionPoolSize(redissonConfig.getConnectionPoolSize())
-                .setDatabase(redissonConfig.getDatabase()).setDnsMonitoringInterval(redissonConfig.getDnsMonitoringInterval())
-                .setSubscriptionConnectionMinimumIdleSize(redissonConfig.getSubscriptionConnectionMinimumIdleSize())
-                .setSubscriptionConnectionPoolSize(redissonConfig.getSubscriptionConnectionPoolSize())
-                .setSubscriptionsPerConnection(redissonConfig.getSubscriptionsPerConnection()).setClientName(redissonConfig.getClientName())
-                .setRetryAttempts(redissonConfig.getRetryAttempts()).setRetryInterval(redissonConfig.getRetryInterval()).setTimeout(redissonConfig.getTimeout())
-                .setConnectTimeout(redissonConfig.getConnectTimeout()).setIdleConnectionTimeout(redissonConfig.getIdleConnectionTimeout())
-                .setPassword(redissonConfig.getPassword());
-
-        if (isNotBlank(redissonConfig.getPassword())) {
-            serverConfig.setPassword(redissonConfig.getPassword());
-        }
-
-        config.setThreads(redissonConfig.getThread());
-//        config.setCodec(new JsonJacksonCodec(objectMapper));
-        config.setTransportMode(TransportMode.NIO);
-        config.setEventLoopGroup(new NioEventLoopGroup());
-        return config;
-    }
-
-    private Config toSingleConfig(RedissonConfig redissonConfig) {
-        Config config = new Config();
         SentinelServersConfig serverConfig = config.useSentinelServers().addSentinelAddress(redissonConfig.getSentinelAddresses())
                 .setMasterName(redissonConfig.getMasterName()).setTimeout(redissonConfig.getTimeout())
                 .setMasterConnectionPoolSize(redissonConfig.getMasterConnectionPoolSize()).setSlaveConnectionPoolSize(redissonConfig.getSlaveConnectionPoolSize())
@@ -132,10 +110,34 @@ public class RedissonDistributedLockTemplate implements DistributedLockTemplate 
         }
 
         config.setThreads(redissonConfig.getThread());
-//        config.setCodec(new JsonJacksonCodec(objectMapper));
+        config.setCodec(new JsonJacksonCodec());
         config.setTransportMode(TransportMode.NIO);
         config.setEventLoopGroup(new NioEventLoopGroup());
         return config;
+    }
+
+    private Config toSingleConfig(RedissonConfig redissonConfig) {
+        Config config = new Config();
+        SingleServerConfig serverConfig = config.useSingleServer().setAddress(redissonConfig.getAddress()).setTcpNoDelay(true)
+                .setConnectionMinimumIdleSize(redissonConfig.getConnectionMinimumIdleSize()).setConnectionPoolSize(redissonConfig.getConnectionPoolSize())
+                .setDatabase(redissonConfig.getDatabase()).setDnsMonitoringInterval(redissonConfig.getDnsMonitoringInterval())
+                .setSubscriptionConnectionMinimumIdleSize(redissonConfig.getSubscriptionConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(redissonConfig.getSubscriptionConnectionPoolSize())
+                .setSubscriptionsPerConnection(redissonConfig.getSubscriptionsPerConnection()).setClientName(redissonConfig.getClientName())
+                .setRetryAttempts(redissonConfig.getRetryAttempts()).setRetryInterval(redissonConfig.getRetryInterval()).setTimeout(redissonConfig.getTimeout())
+                .setConnectTimeout(redissonConfig.getConnectTimeout()).setIdleConnectionTimeout(redissonConfig.getIdleConnectionTimeout())
+                .setPassword(redissonConfig.getPassword());
+
+        if (isNotBlank(redissonConfig.getPassword())) {
+            serverConfig.setPassword(redissonConfig.getPassword());
+        }
+
+        config.setThreads(redissonConfig.getThread());
+        config.setCodec(new JsonJacksonCodec());
+        config.setTransportMode(TransportMode.NIO);
+        config.setEventLoopGroup(new NioEventLoopGroup());
+        return config;
+
     }
 
     private RLock getLock(String lockName, boolean fairLock) {
