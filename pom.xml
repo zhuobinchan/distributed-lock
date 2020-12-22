@@ -16,7 +16,7 @@
         这是分布式锁实现封装的扩展库。
     </description>
 
-    <url>https://github.com/zhuobinchan/distributed-com.benchan.lock</url>
+    <url>https://github.com/zhuobinchan/distributed-lock</url>
 
     <licenses>
         <license>
@@ -35,7 +35,8 @@
 
     <modules>
         <module>distributed-lock-core</module>
-        <module>distributed-lock-spring-boot-start</module>
+        <module>distributed-lock-spring-boot-starter</module>
+        <module>distributed-lock-spring-boot-demo</module>
     </modules>
 
 </project>

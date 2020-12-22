@@ -1,4 +1,4 @@
-package com.benchan.distributed.lock.core.annotation;
+package com.benchan.distributed.lock.spring.annotation;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
