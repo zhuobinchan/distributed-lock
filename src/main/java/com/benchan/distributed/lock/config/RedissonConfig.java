@@ -3,12 +3,11 @@ package com.benchan.distributed.lock.config;
 /**
  * @author zhuobin chan on 2020-12-01 11:32
  */
-public class RedissonConfig extends DistributedLockConfig {
+public class RedissonConfig {
 
     private String address;
     private int connectionMinimumIdleSize = 10;
     private int idleConnectionTimeout = 10000;
-    private int pingTimeout = 1000;
     private int connectTimeout = 10000;
     private int timeout = 10000;
     private int retryAttempts = 3;
@@ -52,14 +51,6 @@ public class RedissonConfig extends DistributedLockConfig {
 
     public void setIdleConnectionTimeout(int idleConnectionTimeout) {
         this.idleConnectionTimeout = idleConnectionTimeout;
-    }
-
-    public int getPingTimeout() {
-        return pingTimeout;
-    }
-
-    public void setPingTimeout(int pingTimeout) {
-        this.pingTimeout = pingTimeout;
     }
 
     public int getConnectTimeout() {

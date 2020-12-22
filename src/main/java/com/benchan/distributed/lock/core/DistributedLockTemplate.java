@@ -15,9 +15,9 @@ public interface DistributedLockTemplate {
 
     <V> V lock(String lockKey, DistributedLockCallable<V> callback, long leaseTime, TimeUnit timeUnit, boolean fairLock);
 
-    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback);
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback) throws InterruptedException;
 
-    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, boolean fairLock);
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, boolean fairLock) throws InterruptedException;
 
-    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, long waitTime, long leaseTime, TimeUnit timeUnit, boolean fairLock);
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, long waitTime, long leaseTime, TimeUnit timeUnit, boolean fairLock) throws InterruptedException;
 }

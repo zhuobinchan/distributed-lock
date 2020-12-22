@@ -30,7 +30,7 @@ public class DistributedLockConfig {
     /**
      * 时间单位。默认为秒。
      */
-    private TimeUnit timeUnit = TimeUnit.SECONDS;
+    private TimeUnit defaultTimeUnit = TimeUnit.SECONDS;
 
     /**
      * 是否忽略前缀, 每个分布式锁默认都会加上当前项目和当前方法作为前缀, 当需要跨项目进行分布式锁时, 可使用忽略前缀从而达到多个项目使用同一个分布式锁
@@ -69,12 +69,12 @@ public class DistributedLockConfig {
         this.defaultTimeout = defaultTimeout;
     }
 
-    public TimeUnit getTimeUnit() {
-        return timeUnit;
+    public TimeUnit getDefaultTimeUnit() {
+        return defaultTimeUnit;
     }
 
-    public void setTimeUnit(TimeUnit timeUnit) {
-        this.timeUnit = timeUnit;
+    public void setDefaultTimeUnit(TimeUnit defaultTimeUnit) {
+        this.defaultTimeUnit = defaultTimeUnit;
     }
 
     public boolean isIgnorePrefix() {
