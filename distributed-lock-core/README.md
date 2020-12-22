@@ -1,5 +1,7 @@
-# distributed-com.benchan.lock
-distributed com.benchan.lock impl
+# distributed-lock-core
+
+redission 方式实现分布式锁
+使用示例:
 
 ```java
     public void testSingleLock(){
@@ -16,3 +18,7 @@ distributed com.benchan.lock impl
         });
     }
 ```
+
+TODO:
+    1、添加zookeeper的实现方式
+    2、测试集群模式下的分布式锁实现
