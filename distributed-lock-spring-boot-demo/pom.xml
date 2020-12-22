@@ -8,7 +8,7 @@
 		<version>2.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.benchan</groupId>
+	<groupId>com.github.benchan</groupId>
 	<artifactId>distributed-lock-spring-boot-demo</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>distributed-lock-spring-boot-demo</name>
@@ -31,7 +31,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.benchan</groupId>
+			<groupId>com.github.benchan</groupId>
 			<artifactId>distributed-lock-spring-boot-starter</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>

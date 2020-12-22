@@ -1,6 +1,14 @@
 # spring boot demo
 整合spring boot 例子
 
+maven添加配置文件
+```xml
+<dependency>
+	<groupId>com.github.benchan</groupId>
+	<artifactId>distributed-lock-spring-boot-starter</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</dependency>
+```
 
 在application文件上添加对应的注解@EnableDistributedLock
 ```java
