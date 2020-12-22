@@ -35,6 +35,7 @@
 
     <modules>
         <module>distributed-lock-core</module>
+        <module>distributed-lock-spring-boot-start</module>
     </modules>
 
 </project>
