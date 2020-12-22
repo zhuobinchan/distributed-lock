@@ -1,4 +1,4 @@
-package com.benchan.distributed.lock.core;
+package com.benchan.distributed.lock.core.core;
 
 /**
  * @author zhuobin chan on 2020-12-01 10:31

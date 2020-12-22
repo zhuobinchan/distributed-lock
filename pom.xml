@@ -7,37 +7,16 @@
     <groupId>com.benchan</groupId>
     <artifactId>distributed-lock</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin.version}</version>
-            </plugin>
-        </plugins>
-    </build>
-
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>distributed-lock</name>
 
     <description>
-        This is an extension library to the distributed lock impl.
+        This is an extension library to the distributed com.benchan.lock impl.
         这是分布式锁实现封装的扩展库。
     </description>
 
-    <url>https://github.com/zhuobinchan/distributed-lock</url>
+    <url>https://github.com/zhuobinchan/distributed-com.benchan.lock</url>
 
     <licenses>
         <license>
@@ -54,33 +33,8 @@
         </developer>
     </developers>
 
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <redisson.version>3.14.0</redisson.version>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-        <junit-jupiter.version>5.6.2</junit-jupiter.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>${redisson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>distributed-lock-core</module>
+    </modules>
 
 </project>

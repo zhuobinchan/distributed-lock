@@ -1,4 +1,4 @@
-package com.benchan.distributed.lock.core;
+package com.benchan.distributed.lock.core.core;
 
 import java.util.concurrent.TimeUnit;
 

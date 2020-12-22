@@ -1,4 +1,4 @@
-# distributed-lock
-distributed lock impl
+# distributed-com.benchan.lock
+distributed com.benchan.lock impl
 
 

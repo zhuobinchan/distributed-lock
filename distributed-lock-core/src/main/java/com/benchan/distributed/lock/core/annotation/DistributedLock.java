@@ -1,6 +1,4 @@
-package com.benchan.distributed.lock.annotation;
-
-import com.benchan.distributed.lock.config.DistributedLockConfig;
+package com.benchan.distributed.lock.core.annotation;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

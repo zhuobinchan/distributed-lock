@@ -1,4 +1,4 @@
-package com.benchan.distributed.lock.config;
+package com.benchan.distributed.lock.core.config;
 
 /**
  * @author zhuobin chan on 2020-12-01 11:32

@@ -1,7 +1,7 @@
-import com.benchan.distributed.lock.config.DistributedLockConfig;
-import com.benchan.distributed.lock.config.RedissonConfig;
-import com.benchan.distributed.lock.core.DistributedLockTemplate;
-import com.benchan.distributed.lock.core.temple.RedissonDistributedLockTemplate;
+import com.benchan.distributed.lock.core.config.DistributedLockConfig;
+import com.benchan.distributed.lock.core.config.RedissonConfig;
+import com.benchan.distributed.lock.core.core.DistributedLockTemplate;
+import com.benchan.distributed.lock.core.core.temple.RedissonDistributedLockTemplate;
 import org.junit.jupiter.api.Test;
 
 /**
