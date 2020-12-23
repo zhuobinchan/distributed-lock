@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 public class SpringDistributedLockAnnotationParser implements DistributedLockAnnotationParser {
     public String parseDistributedLockAnnotation(Method method) {
         //TODO 处理配置分布锁注解
+
+//        DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
         return null;
     }
 }
