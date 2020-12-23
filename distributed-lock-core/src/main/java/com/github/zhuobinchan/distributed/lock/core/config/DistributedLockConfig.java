@@ -32,11 +32,6 @@ public class DistributedLockConfig {
      */
     private TimeUnit defaultTimeUnit = TimeUnit.SECONDS;
 
-    /**
-     * 是否忽略前缀, 每个分布式锁默认都会加上当前项目和当前方法作为前缀, 当需要跨项目进行分布式锁时, 可使用忽略前缀从而达到多个项目使用同一个分布式锁
-     */
-    private boolean ignorePrefix = false;
-
     public boolean isFairLock() {
         return fairLock;
     }
@@ -77,11 +72,4 @@ public class DistributedLockConfig {
         this.defaultTimeUnit = defaultTimeUnit;
     }
 
-    public boolean isIgnorePrefix() {
-        return ignorePrefix;
-    }
-
-    public void setIgnorePrefix(boolean ignorePrefix) {
-        this.ignorePrefix = ignorePrefix;
-    }
 }
