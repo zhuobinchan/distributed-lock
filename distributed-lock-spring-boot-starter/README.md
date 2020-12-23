@@ -1,38 +1,5 @@
 # distributed-lock
 
-# 非spring整合
-redission 方式实现分布式锁
-maven添加配置文件
-```xml
-<dependency>
-    <groupId>com.github.zhuobinchan</groupId>
-    <artifactId>distributed-lock-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-```
-
-使用示例:
-```java
-public class DistributedLockTestCase {
-    @Test
-    public void testSingleLock(){
-        RedissonConfig redissonConfig = new RedissonConfig();
-        redissonConfig.setAddress("redis://*");
-
-        RedissonDistributedLockTemplate redissonDistributedLockTemplate = new RedissonDistributedLockTemplate();
-        redissonDistributedLockTemplate.setRedissonConfig(redissonConfig);
-        redissonDistributedLockTemplate.setDistributedLockConfig(new DistributedLockConfig());
-
-        DistributedLockTemplate template = redissonDistributedLockTemplate;
-        template.lock("test",()->{
-            return "test-a";
-        });
-
-    }
-}
-```
-
-
 # 整合spring boot 例子
 maven添加配置文件
 ```xml
