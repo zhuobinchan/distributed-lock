@@ -1,6 +1,6 @@
 # distributed-lock
 
-# 非spring整合
+## 非spring整合
 redission 方式实现分布式锁
 maven添加配置文件
 ```xml
@@ -33,7 +33,7 @@ public class DistributedLockTestCase {
 ```
 
 
-# 整合spring boot 例子
+## 整合spring boot 例子
 maven添加配置文件
 ```xml
 <dependency>
@@ -114,3 +114,12 @@ public class DistributedLockServiceImpl implements DistributedLockService {
     }
 }
 ```
+
+## 将会支持列表
+
+ 序号      | 功能列表     | 是否支持  
+ -------- | :-----------:  | :-----------: 
+ 1     | 支持redission实现发布锁     | 支持  
+ 2     | 支持zookeeper实现发布锁     | 未来支持
+ 3     | 补充测试用例     | 未来支持
+ 4     | 集群模式的分布式锁实现     | 未来支持
