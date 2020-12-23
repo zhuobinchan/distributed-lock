@@ -23,7 +23,7 @@ public class DistributedLockSpringBootDemoApplication {
 }
 ```
 
-配置文件上添加
+properties配置文件上添加
 ```properties
 spring.distributed.lock.enable=true
 spring.distributed.lock.lock-type=redission
