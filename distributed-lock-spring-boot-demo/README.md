@@ -27,7 +27,7 @@ public class DistributedLockSpringBootDemoApplication {
 ```properties
 spring.distributed.lock.enable=true
 spring.distributed.lock.lock-type=redission
-spring.distributed.lock.redisson-config.address=redis://*
+spring.distributed.lock.redisson-config.address=redis://ip:port
 ```
 
 然后注入使用即可
