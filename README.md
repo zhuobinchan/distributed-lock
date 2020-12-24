@@ -91,7 +91,7 @@ class DistributedLockSpringBootDemoApplicationTests {
 class DistributedLockSpringBootDemoApplicationTests {
     @Test
     void templateUtilsTest() {
-        TemplateUtils.lock("test", () -> {
+        DistributedLockTemplateUtils.lock("test", () -> {
             return "test-a";
         });
     }
