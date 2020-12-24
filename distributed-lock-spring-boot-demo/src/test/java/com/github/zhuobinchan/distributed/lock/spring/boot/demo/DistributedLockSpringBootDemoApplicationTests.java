@@ -3,6 +3,7 @@ package com.github.zhuobinchan.distributed.lock.spring.boot.demo;
 import com.github.zhuobinchan.distributed.lock.core.core.DistributedLockTemplate;
 import com.github.zhuobinchan.distributed.lock.spring.boot.demo.service.DistributedLockService;
 import com.github.zhuobinchan.distributed.lock.spring.boot.demo.service.TestLockView;
+import com.github.zhuobinchan.distributed.lock.spring.utils.DistributedLockTemplateUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ class DistributedLockSpringBootDemoApplicationTests {
     @Test
     void templateTest() {
         template.lock("test", () -> "test-a");
+    }
+
+    @Test
+    void templateUtilsTest() {
+        DistributedLockTemplateUtils.lock("test", () -> {
+            return "test-a";
+        });
     }
 
     @Test

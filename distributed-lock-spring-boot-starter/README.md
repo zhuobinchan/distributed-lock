@@ -31,7 +31,7 @@ spring.distributed.lock.redisson-config.address=redis://ip:port
 ```
 
 使用方式一：
-然后注入使用即可
+注入方式使用即可
 ```java
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -51,6 +51,21 @@ class DistributedLockSpringBootDemoApplicationTests {
 ```
 
 使用方式二：
+静态类调用方式：
+```java
+@SpringBootTest
+@RunWith(SpringRunner.class)
+class DistributedLockSpringBootDemoApplicationTests {
+    @Test
+    void templateUtilsTest() {
+        TemplateUtils.lock("test", () -> {
+            return "test-a";
+        });
+    }
+}
+```
+
+使用方式三：
 需要使用由spring进行管理，因为是通过spring的aop进行实现，用法和cache的注解类似
 ```java
 @Service
