@@ -5,9 +5,17 @@
 
     <groupId>com.github.zhuobinchan</groupId>
     <artifactId>distributed-lock-spring-boot-demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>distributed-lock-spring-boot-demo</name>
-    <description>Demo project for Spring Boot</description>
+
+    <description>
+        This is an extension library to the distributed com.benchan.lock impl.
+        这是分布式锁实现封装的扩展库。
+    </description>
+    <url>https://github.com/zhuobinchan/distributed-lock</url>
+    <scm>
+        <url>https://github.com/zhuobinchan/distributed-lock</url>
+    </scm>
     <packaging>jar</packaging>
 
     <parent>
@@ -16,6 +24,20 @@
         <version>2.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <!--仓库地址配置信息-->
+    <distributionManagement>
+        <snapshotRepository>
+            <!--id 要与setting.xml server id一致 -->
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <!--id 要与setting.xml server id一致 -->
+            <id>releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,7 +59,7 @@
         <dependency>
             <groupId>com.github.zhuobinchan</groupId>
             <artifactId>distributed-lock-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -53,7 +75,46 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- 要生成Javadoc和Source jar文件，您必须配置javadoc和源Maven插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--  必须配置GPG插件用于使用以下配置对组件进行签名 -->
+            <!-- GPG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>

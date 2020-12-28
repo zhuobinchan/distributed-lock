@@ -6,16 +6,20 @@
 
     <groupId>com.github.zhuobinchan</groupId>
     <artifactId>distributed-lock</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <name>distributed-lock</name>
+
 
     <description>
         This is an extension library to the distributed com.benchan.lock impl.
         这是分布式锁实现封装的扩展库。
     </description>
 
+    <scm>
+        <url>https://github.com/zhuobinchan/distributed-lock</url>
+    </scm>
     <url>https://github.com/zhuobinchan/distributed-lock</url>
 
     <licenses>
@@ -32,6 +36,25 @@
             <url>https://github.com/zhuobinchan</url>
         </developer>
     </developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!--仓库地址配置信息-->
+    <distributionManagement>
+        <snapshotRepository>
+            <!--id 要与setting.xml server id一致 -->
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <!--id 要与setting.xml server id一致 -->
+            <id>releases</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
 
     <modules>
         <module>distributed-lock-core</module>
