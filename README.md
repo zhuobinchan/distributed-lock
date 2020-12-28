@@ -130,6 +130,25 @@ public class DistributedLockServiceImpl implements DistributedLockService {
 }
 ```
 
+## 如果需要编译成自己项目，请将一下文件进行删除
+```xml
+<!--  必须配置GPG插件用于使用以下配置对组件进行签名 -->
+            <!-- GPG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+```
+
 ## 将会支持列表
 
  序号      | 功能列表     | 是否支持  
