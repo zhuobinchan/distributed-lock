@@ -15,32 +15,32 @@ public @interface DistributedLock {
 
 
     /**
-     * spring el表达式, 参考cache
+     * @return 分布式锁key值,spring el表达式, 参考cache
      */
     String key();
 
     /**
-     * 是否使用公平锁。 公平锁即先来先得。
+     * @return 是否使用公平锁。 公平锁即先来先得。
      */
     boolean fairLock() default false;
 
     /**
-     * 是否使用尝试锁。
+     * @return 是否使用尝试锁
      */
     boolean tryLock() default true;
 
     /**
-     * 最长等待时间。 该字段只有当tryLock()返回true才有效。
+     * @return 最长等待时间。 该字段只有当tryLock()返回true才有效。
      */
     long waitTime() default 60L;
 
     /**
-     * 锁超时时间。 超时时间过后，锁自动释放。 建议： 尽量缩简需要加锁的逻辑。
+     * @return 锁超时时间。 超时时间过后，锁自动释放。 建议： 尽量缩简需要加锁的逻辑。
      */
     long leaseTime() default 20L;
 
     /**
-     * 时间单位。默认为秒。
+     * @return 时间单位。默认为秒。
      */
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 }
