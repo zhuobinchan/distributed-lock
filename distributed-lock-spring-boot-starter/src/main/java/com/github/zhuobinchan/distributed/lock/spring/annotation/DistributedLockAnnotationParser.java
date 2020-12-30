@@ -6,7 +6,8 @@ package com.github.zhuobinchan.distributed.lock.spring.annotation;
 public interface DistributedLockAnnotationParser {
 
     /**
-     * 返回对应的加锁key
+     * @param view 注解处理类
+     * @return 返回对应的加锁key
      */
     String parseDistributedLockAnnotation(LockKeySpelView view);
 }

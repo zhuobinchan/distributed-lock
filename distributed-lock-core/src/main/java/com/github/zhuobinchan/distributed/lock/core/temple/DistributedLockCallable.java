@@ -7,7 +7,7 @@ package com.github.zhuobinchan.distributed.lock.core.temple;
 public interface DistributedLockCallable<V> {
 
     /**
-     * 分布式锁实现逻辑抽象逻辑
+     * @return 分布式锁实现逻辑抽象逻辑
      */
     V call();
 }
