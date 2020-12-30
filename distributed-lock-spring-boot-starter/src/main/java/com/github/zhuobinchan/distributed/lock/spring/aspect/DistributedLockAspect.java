@@ -1,6 +1,6 @@
 package com.github.zhuobinchan.distributed.lock.spring.aspect;
 
-import com.github.zhuobinchan.distributed.lock.core.core.DistributedLockTemplate;
+import com.github.zhuobinchan.distributed.lock.core.temple.DistributedLockTemplate;
 import com.github.zhuobinchan.distributed.lock.spring.annotation.DistributedLock;
 import com.github.zhuobinchan.distributed.lock.spring.annotation.DistributedLockAnnotationParser;
 import com.github.zhuobinchan.distributed.lock.spring.annotation.LockKeySpelView;

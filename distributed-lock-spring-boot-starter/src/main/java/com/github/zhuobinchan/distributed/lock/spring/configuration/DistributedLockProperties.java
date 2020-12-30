@@ -2,6 +2,7 @@ package com.github.zhuobinchan.distributed.lock.spring.configuration;
 
 import com.github.zhuobinchan.distributed.lock.core.config.DistributedLockConfig;
 import com.github.zhuobinchan.distributed.lock.core.config.RedissonConfig;
+import com.github.zhuobinchan.distributed.lock.core.config.ZookeeperConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +11,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(
-        prefix = "spring.distributed.lock"
+        prefix = "spring.distributed.lock", ignoreInvalidFields = true
 )
 public class DistributedLockProperties {
     private boolean enable;
     private LockType lockType;
     private DistributedLockConfig config;
     private RedissonConfig redissonConfig;
+    private ZookeeperConfig zookeeperConfig;
 
     public boolean isEnable() {
         return enable;
@@ -48,5 +50,13 @@ public class DistributedLockProperties {
 
     public void setRedissonConfig(RedissonConfig redissonConfig) {
         this.redissonConfig = redissonConfig;
+    }
+
+    public ZookeeperConfig getZookeeperConfig() {
+        return zookeeperConfig;
+    }
+
+    public void setZookeeperConfig(ZookeeperConfig zookeeperConfig) {
+        this.zookeeperConfig = zookeeperConfig;
     }
 }

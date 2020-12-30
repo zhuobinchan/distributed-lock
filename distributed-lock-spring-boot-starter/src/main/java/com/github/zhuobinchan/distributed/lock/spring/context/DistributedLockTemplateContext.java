@@ -1,6 +1,6 @@
 package com.github.zhuobinchan.distributed.lock.spring.context;
 
-import com.github.zhuobinchan.distributed.lock.core.core.DistributedLockTemplate;
+import com.github.zhuobinchan.distributed.lock.core.temple.DistributedLockTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

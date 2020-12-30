@@ -1,6 +1,6 @@
 package com.github.zhuobinchan.distributed.lock.spring.boot.demo;
 
-import com.github.zhuobinchan.distributed.lock.core.core.DistributedLockTemplate;
+import com.github.zhuobinchan.distributed.lock.core.temple.DistributedLockTemplate;
 import com.github.zhuobinchan.distributed.lock.spring.boot.demo.service.DistributedLockService;
 import com.github.zhuobinchan.distributed.lock.spring.boot.demo.service.TestLockView;
 import com.github.zhuobinchan.distributed.lock.spring.utils.DistributedLockTemplateUtils;

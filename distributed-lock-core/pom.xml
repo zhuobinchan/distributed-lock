@@ -6,13 +6,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.zhuobinchan</groupId>
     <artifactId>distributed-lock-core</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <packaging>jar</packaging>
     <name>distributed-lock-core</name>
 
     <description>
-        This is an extension library to the distributed com.benchan.lock impl.
+        This is an extension library to the lock impl.
         这是分布式锁实现封装的扩展库。
+        项目地址:https://github.com/zhuobinchan/distributed-lock
     </description>
     <url>https://github.com/zhuobinchan/distributed-lock</url>
     <scm>
@@ -53,6 +54,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <redisson.version>3.14.0</redisson.version>
+        <curator-recipes.version>5.0.0</curator-recipes.version>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -67,6 +69,12 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>${curator-recipes.version}</version>
         </dependency>
 
         <dependency>

@@ -1,6 +1,6 @@
 package com.github.zhuobinchan.distributed.lock.spring.utils;
 
-import com.github.zhuobinchan.distributed.lock.core.core.DistributedLockCallable;
+import com.github.zhuobinchan.distributed.lock.core.temple.DistributedLockCallable;
 import com.github.zhuobinchan.distributed.lock.spring.context.DistributedLockTemplateContext;
 
 import java.util.concurrent.TimeUnit;
