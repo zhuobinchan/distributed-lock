@@ -1,49 +1,22 @@
 # distributed-lock
 
-## 非spring整合
-redission 方式实现分布式锁
-maven添加配置文件
-```xml
-<dependency>
-    <groupId>com.github.zhuobinchan</groupId>
-    <artifactId>distributed-lock-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-```
-
-使用示例:
-```java
-public class DistributedLockTestCase {
-    @Test
-    public void testSingleLock(){
-        RedissonConfig redissonConfig = new RedissonConfig();
-        redissonConfig.setAddress("redis://*");
-
-        RedissonDistributedLockTemplate redissonDistributedLockTemplate = new RedissonDistributedLockTemplate();
-        redissonDistributedLockTemplate.setRedissonConfig(redissonConfig);
-        redissonDistributedLockTemplate.setDistributedLockConfig(new DistributedLockConfig());
-
-        DistributedLockTemplate template = redissonDistributedLockTemplate;
-        template.lock("test",()->{
-            return "test-a";
-        });
-
-    }
-}
-```
 
 
-## 整合spring boot 例子
+
+# 整合spring boot 例子
+
+第1步：
 maven添加配置文件
 ```xml
 <dependency>
 	<groupId>>com.github.zhuobinchan</groupId>
 	<artifactId>distributed-lock-spring-boot-starter</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>2.0</version>
 </dependency>
 ```
 
-在application文件上添加对应的注解@EnableDistributedLock
+第2步：
+在application启动类上添加对应的注解@EnableDistributedLock
 ```java
 @EnableDistributedLock
 @SpringBootApplication
@@ -56,12 +29,28 @@ public class DistributedLockSpringBootDemoApplication {
 }
 ```
 
-properties配置文件上添加
+第3步：在对应配置文件上添加对应的配置
+
+以Redisson作为分布式锁
 ```properties
 spring.distributed.lock.enable=true
-spring.distributed.lock.lock-type=redission
-spring.distributed.lock.redisson-config.address=redis://ip:port
+
+# redisson方式实现分布式锁
+spring.distributed.lock.lock-type=redisson
+spring.distributed.lock.redisson-config.address=redis://127.0.0.1:6379
 ```
+
+以Zookeeper作为分布式锁
+```properties
+spring.distributed.lock.enable=true
+
+# zookeeper方式实现分布式锁
+spring.distributed.lock.lock-type=zookeeper
+spring.distributed.lock.zookeeper-config.connect-string=127.0.0.1:2181
+```
+
+第4步: 可以用一下集中方式使用分布式锁
+
 
 使用方式一：
 注入方式使用即可
@@ -75,9 +64,7 @@ class DistributedLockSpringBootDemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-		template.lock("test",()->{
-			return "test-a";
-		});
+		template.lock("test",()->"test-a");
 	}
 
 }
@@ -91,9 +78,7 @@ class DistributedLockSpringBootDemoApplicationTests {
 class DistributedLockSpringBootDemoApplicationTests {
     @Test
     void templateUtilsTest() {
-        DistributedLockTemplateUtils.lock("test", () -> {
-            return "test-a";
-        });
+        DistributedLockTemplateUtils.lock("test", () -> "test-a");
     }
 }
 ```
@@ -130,30 +115,11 @@ public class DistributedLockServiceImpl implements DistributedLockService {
 }
 ```
 
-## 如果需要编译成自己项目，请将一下文件进行删除
-```xml
-<!--  必须配置GPG插件用于使用以下配置对组件进行签名 -->
-            <!-- GPG -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-```
-
 ## 将会支持列表
 
  序号      | 功能列表     | 是否支持  
  -------- | :-----------:  | :-----------: 
  1     | 支持redission实现发布锁     | 支持  
- 2     | 支持zookeeper实现发布锁     | 未来支持
+ 2     | 支持zookeeper实现发布锁     | 支持
  3     | 补充测试用例     | 未来支持
  4     | 集群模式的分布式锁实现     | 未来支持

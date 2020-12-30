@@ -33,7 +33,7 @@ public class DistributedLockAutoConfiguration {
         if (distributedLockConfig == null) {
             distributedLockConfig = new DistributedLockConfig();
         }
-        if (properties.getLockType() == LockType.ZOOKEPPER) {
+        if (properties.getLockType() == LockType.ZOOKEEPER) {
             ZookeeperConfig zookeeperConfig = properties.getZookeeperConfig();
             ZookeeperDistributedLockTemplate zookeeperDistributedLockTemplate = new ZookeeperDistributedLockTemplate();
             zookeeperDistributedLockTemplate.setZookeeperConfig(zookeeperConfig);
@@ -41,7 +41,7 @@ public class DistributedLockAutoConfiguration {
             return zookeeperDistributedLockTemplate;
         }
 
-        if (properties.getLockType() == LockType.REDISSION) {
+        if (properties.getLockType() == LockType.REDISSON) {
             RedissonConfig redissonConfig = properties.getRedissonConfig();
             RedissonDistributedLockTemplate redissonDistributedLockTemplate = new RedissonDistributedLockTemplate();
             redissonDistributedLockTemplate.setRedissonConfig(redissonConfig);

@@ -1,24 +1,48 @@
 # distributed-lock-core
+# 非spring boot 整合例子
 
-redission 方式实现分布式锁
-使用示例:
+1、添加jar包引入
+```xml
+<dependency>
+    <groupId>com.github.zhuobinchan</groupId>
+    <artifactId>distributed-lock-core</artifactId>
+    <version>2.0</version>
+</dependency>
+```
 
+2、使用示例:
 ```java
-    public void testSingleLock(){
+public class DistributedLockTestCase {
+
+    //Redisson 方式实现分布式锁
+    @Test
+    public void testSingleRedisLock(){
         RedissonConfig redissonConfig = new RedissonConfig();
-        redissonConfig.setAddress("redis://*");
+        redissonConfig.setAddress("redis://127.0.0.1:6379");
 
         RedissonDistributedLockTemplate redissonDistributedLockTemplate = new RedissonDistributedLockTemplate();
         redissonDistributedLockTemplate.setRedissonConfig(redissonConfig);
         redissonDistributedLockTemplate.setDistributedLockConfig(new DistributedLockConfig());
 
-        DistributedLockTemplate template = redissonDistributedLockTemplate;
-        template.lock("test",()->{
-            return "test-a";
-        });
+        ((DistributedLockTemplate) redissonDistributedLockTemplate).lock("test",()->"test-a");
+
     }
+
+    //Zookeeper 方式实现分布式锁
+    @Test
+    public void testSingleZookeeperLock(){
+        ZookeeperConfig zookeeperConfig = new ZookeeperConfig();
+        zookeeperConfig.setConnectString("127.0.0.1:2181");
+
+        ZookeeperDistributedLockTemplate zookeeperDistributedLockTemplate = new ZookeeperDistributedLockTemplate();
+        zookeeperDistributedLockTemplate.setZookeeperConfig(zookeeperConfig);
+        zookeeperDistributedLockTemplate.setDistributedLockConfig(new DistributedLockConfig());
+
+        ((DistributedLockTemplate) zookeeperDistributedLockTemplate).lock("test",()->"test-a");
+
+    }
+}
 ```
 
 TODO:
-    1、添加zookeeper的实现方式
     2、测试集群模式下的分布式锁实现

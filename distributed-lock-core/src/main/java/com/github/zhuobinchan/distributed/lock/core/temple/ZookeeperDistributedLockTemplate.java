@@ -62,7 +62,7 @@ public class ZookeeperDistributedLockTemplate implements DistributedLockTemplate
 
 
     private Lock getLock(String lockName) {
-        return new FairLock(curatorFramework, lockName);
+        return new FairLock(curatorFramework, this.zookeeperConfig.getRootPath() + lockName);
     }
 
     public void setZookeeperConfig(ZookeeperConfig zookeeperConfig) {
@@ -77,5 +77,6 @@ public class ZookeeperDistributedLockTemplate implements DistributedLockTemplate
 
     private void configZookeeper(ZookeeperConfig zookeeperConfig) {
         this.curatorFramework = CuratorFrameworkFactory.newClient(zookeeperConfig.getConnectString(), new ExponentialBackoffRetry(this.zookeeperConfig.getBaseSleepTimeMs(), this.zookeeperConfig.getMaxRetries()));
+        this.curatorFramework.start();
     }
 }

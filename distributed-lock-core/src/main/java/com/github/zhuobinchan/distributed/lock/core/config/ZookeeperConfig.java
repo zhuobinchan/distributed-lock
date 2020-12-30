@@ -7,7 +7,7 @@ public class ZookeeperConfig {
     private int baseSleepTimeMs = 1000;
     private int maxRetries = 3;
     private String connectString;
-    private String rootPath = "/ROOT_LOCK/";
+    private String rootPath = "/ROOT/ROOT_LOCK/";
 
 
     public int getBaseSleepTimeMs() {
