@@ -60,6 +60,15 @@ public class ZookeeperDistributedLockTemplate implements DistributedLockTemplate
         }
     }
 
+    @Override
+    public void setDistributedLockConfig(DistributedLockConfig distributedLockConfig) {
+        this.distributedLockConfig = distributedLockConfig;
+    }
+
+    @Override
+    public DistributedLockConfig getDistributedLockConfig() {
+        return this.distributedLockConfig;
+    }
 
     private Lock getLock(String lockName) {
         return new FairLock(curatorFramework, this.zookeeperConfig.getRootPath() + lockName);
@@ -69,11 +78,6 @@ public class ZookeeperDistributedLockTemplate implements DistributedLockTemplate
         this.zookeeperConfig = zookeeperConfig;
         configZookeeper(this.zookeeperConfig);
     }
-
-    public void setDistributedLockConfig(DistributedLockConfig distributedLockConfig) {
-        this.distributedLockConfig = distributedLockConfig;
-    }
-
 
     private void configZookeeper(ZookeeperConfig zookeeperConfig) {
         this.curatorFramework = CuratorFrameworkFactory.newClient(zookeeperConfig.getConnectString(), new ExponentialBackoffRetry(this.zookeeperConfig.getBaseSleepTimeMs(), this.zookeeperConfig.getMaxRetries()));

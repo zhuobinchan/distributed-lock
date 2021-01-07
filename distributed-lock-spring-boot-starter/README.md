@@ -8,7 +8,7 @@ maven添加配置文件
 <dependency>
 	<groupId>>com.github.zhuobinchan</groupId>
 	<artifactId>distributed-lock-spring-boot-starter</artifactId>
-	<version>2.0</version>
+    <version>2.1</version>
 </dependency>
 ```
 
@@ -46,7 +46,7 @@ spring.distributed.lock.lock-type=zookeeper
 spring.distributed.lock.zookeeper-config.connect-string=127.0.0.1:2181
 ```
 
-第4步: 可以用一下集中方式使用分布式锁
+第4步: 可以用以下集中方式使用分布式锁
 
 
 使用方式一：

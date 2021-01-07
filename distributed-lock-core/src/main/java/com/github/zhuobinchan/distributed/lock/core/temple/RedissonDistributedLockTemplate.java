@@ -71,14 +71,21 @@ public class RedissonDistributedLockTemplate implements DistributedLockTemplate 
         return null;
     }
 
+    @Override
+    public void setDistributedLockConfig(DistributedLockConfig distributedLockConfig) {
+        this.distributedLockConfig = distributedLockConfig;
+    }
+
+    @Override
+    public DistributedLockConfig getDistributedLockConfig() {
+        return this.distributedLockConfig;
+    }
+
     public void setRedissonConfig(RedissonConfig redissonConfig) {
         this.redissonConfig = redissonConfig;
         configRedisson(this.redissonConfig);
     }
 
-    public void setDistributedLockConfig(DistributedLockConfig distributedLockConfig) {
-        this.distributedLockConfig = distributedLockConfig;
-    }
 
     private void configRedisson(RedissonConfig redissonConfig) {
         if (isNotBlank(redissonConfig.getMasterName())) {
@@ -103,10 +110,6 @@ public class RedissonDistributedLockTemplate implements DistributedLockTemplate 
                 .setConnectTimeout(redissonConfig.getConnectTimeout()).setIdleConnectionTimeout(redissonConfig.getIdleConnectionTimeout())
                 .setPassword(redissonConfig.getPassword());
 
-        if (isNotBlank(redissonConfig.getPassword())) {
-            serverConfig.setPassword(redissonConfig.getPassword());
-        }
-
         config.setThreads(redissonConfig.getThread());
         config.setCodec(new JsonJacksonCodec());
         config.setTransportMode(TransportMode.NIO);
@@ -125,10 +128,6 @@ public class RedissonDistributedLockTemplate implements DistributedLockTemplate 
                 .setRetryAttempts(redissonConfig.getRetryAttempts()).setRetryInterval(redissonConfig.getRetryInterval()).setTimeout(redissonConfig.getTimeout())
                 .setConnectTimeout(redissonConfig.getConnectTimeout()).setIdleConnectionTimeout(redissonConfig.getIdleConnectionTimeout())
                 .setPassword(redissonConfig.getPassword());
-
-        if (isNotBlank(redissonConfig.getPassword())) {
-            serverConfig.setPassword(redissonConfig.getPassword());
-        }
 
         config.setThreads(redissonConfig.getThread());
         config.setCodec(new JsonJacksonCodec());

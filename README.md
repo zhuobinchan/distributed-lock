@@ -7,7 +7,7 @@
 <dependency>
     <groupId>com.github.zhuobinchan</groupId>
     <artifactId>distributed-lock-core</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
 </dependency>
 ```
 
@@ -54,7 +54,7 @@ public class DistributedLockTestCase {
 <dependency>
     <groupId>com.github.zhuobinchan</groupId>
     <artifactId>distributed-lock-core</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
 </dependency>
 ```
 
@@ -101,7 +101,7 @@ maven添加配置文件
 <dependency>
 	<groupId>>com.github.zhuobinchan</groupId>
 	<artifactId>distributed-lock-spring-boot-starter</artifactId>
-	<version>2.0</version>
+    <version>2.1</version>
 </dependency>
 ```
 
@@ -139,7 +139,7 @@ spring.distributed.lock.lock-type=zookeeper
 spring.distributed.lock.zookeeper-config.connect-string=127.0.0.1:2181
 ```
 
-第4步: 可以用一下集中方式使用分布式锁
+第4步: 可以用以下集中方式使用分布式锁
 
 
 使用方式一：
@@ -213,3 +213,134 @@ public class DistributedLockServiceImpl implements DistributedLockService {
  2     | 支持zookeeper实现发布锁     | 支持
  3     | 补充测试用例     | 未来支持
  4     | 集群模式的分布式锁实现     | 未来支持
+ 
+ 
+ 
+ ## 核心方法参数说明
+ 非spring boot方式核心类 方法解释
+ ```java
+public interface DistributedLockTemplate {
+
+    /**
+     * 直接上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V lock(String lockKey, DistributedLockCallable<V> callback);
+
+    /**
+     * 直接上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param fairLock 是否公平锁
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V lock(String lockKey, DistributedLockCallable<V> callback, boolean fairLock);
+
+    /**
+     * 直接上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param leaseTime 释放锁时间
+     * @param timeUnit 时间单位
+     * @param fairLock 是否公平锁
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V lock(String lockKey, DistributedLockCallable<V> callback, long leaseTime, TimeUnit timeUnit, boolean fairLock);
+
+    /**
+     * 尝试上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback) throws InterruptedException;
+
+    /**
+     * 尝试上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param fairLock 是否公平锁
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, boolean fairLock) throws InterruptedException;
+
+    /**
+     * 尝试上锁
+     * @param lockKey 锁键
+     * @param callback 需要锁的区域逻辑代码实现
+     * @param waitTime 上锁等待时长
+     * @param leaseTime 释放锁时间
+     * @param timeUnit 时间单位
+     * @param fairLock 是否公平锁
+     * @param <V> 返回值泛型
+     * @return 区域逻辑代码执行返回值
+     */
+    <V> V tryLock(String lockKey, DistributedLockCallable<V> callback, long waitTime, long leaseTime, TimeUnit timeUnit, boolean fairLock) throws InterruptedException;
+
+    /**
+     * 通用配置设置
+     * @param distributedLockConfig 通用配置
+     */
+    void setDistributedLockConfig(DistributedLockConfig distributedLockConfig);
+
+    /**
+     * 过去通用配置
+     * @return 通用配置
+     */
+    DistributedLockConfig getDistributedLockConfig();
+}
+```
+## spring boot方式核心类 方法解释
+DistributedLockTemplate 以及 DistributedLockTemplateUtils 使用方法同上
+
+注解核心使用方法
+```java
+public @interface DistributedLock {
+
+
+    /**
+     * @return 分布式锁key值,spring el表达式, 参考cache
+     */
+    String key();
+
+    /**
+     * @return 是否从配置文件读取下面字段的数据
+     *
+     *
+     * 包括以下字段：fairLock{@link #fairLock};tryLock{@link #tryLock};waitTime{@link #waitTime};leaseTime{@link #leaseTime};timeUnit{@link #timeUnit};
+     */
+    boolean readInConfig() default true;
+
+    /**
+     * @return 是否使用公平锁。 公平锁即先来先得。
+     */
+    boolean fairLock() default false;
+
+    /**
+     * @return 是否使用尝试锁
+     */
+    boolean tryLock() default true;
+
+    /**
+     * @return 最长等待时间。 该字段只有当tryLock()返回true才有效。
+     */
+    long waitTime() default 60L;
+
+    /**
+     * @return 锁超时时间。 超时时间过后，锁自动释放。 建议： 尽量缩简需要加锁的逻辑。
+     */
+    long leaseTime() default 20L;
+
+    /**
+     * @return 时间单位。默认为秒。
+     */
+    TimeUnit timeUnit() default TimeUnit.SECONDS;
+}
+```

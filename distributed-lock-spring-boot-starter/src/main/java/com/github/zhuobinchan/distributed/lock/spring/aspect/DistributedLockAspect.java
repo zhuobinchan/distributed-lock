@@ -32,11 +32,28 @@ public class DistributedLockAspect {
         String lockKeySpel = distributedLock.key();
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         Method method = signature.getMethod();
+        String lockKey = distributedLockAnnotationParser.parseDistributedLockAnnotation(new LockKeySpelView(args, target, lockKeySpel, method));
 
+        boolean readInConfig = distributedLock.readInConfig();
+        if (readInConfig) {
+            return readInConfig(proceedingJoinPoint, lockKey);
+        }
+
+        return readInAnnotation(proceedingJoinPoint, distributedLock, lockKey);
+    }
+
+    private Object readInConfig(ProceedingJoinPoint proceedingJoinPoint, String lockKey) throws InterruptedException {
+        boolean tryLock = distributedLockTemplate.getDistributedLockConfig().isTryLock();
+        if (tryLock) {
+            return distributedLockTemplate.tryLock(lockKey, () -> proceed(proceedingJoinPoint));
+        } else {
+            return distributedLockTemplate.lock(lockKey, () -> proceed(proceedingJoinPoint));
+        }
+    }
+
+    private Object readInAnnotation(ProceedingJoinPoint proceedingJoinPoint, DistributedLock distributedLock, String lockKey) throws InterruptedException {
         boolean fairLock = distributedLock.fairLock();
         boolean tryLock = distributedLock.tryLock();
-
-        String lockKey = distributedLockAnnotationParser.parseDistributedLockAnnotation(new LockKeySpelView(args, target, lockKeySpel, method));
         if (tryLock) {
             return distributedLockTemplate.tryLock(lockKey, () -> proceed(proceedingJoinPoint), distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit(), fairLock);
         } else {

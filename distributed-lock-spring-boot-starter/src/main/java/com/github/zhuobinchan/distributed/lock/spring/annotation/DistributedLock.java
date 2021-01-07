@@ -20,6 +20,14 @@ public @interface DistributedLock {
     String key();
 
     /**
+     * @return 是否从配置文件读取下面字段的数据
+     *
+     *
+     * 包括以下字段：fairLock{@link #fairLock};tryLock{@link #tryLock};waitTime{@link #waitTime};leaseTime{@link #leaseTime};timeUnit{@link #timeUnit};
+     */
+    boolean readInConfig() default true;
+
+    /**
      * @return 是否使用公平锁。 公平锁即先来先得。
      */
     boolean fairLock() default false;
